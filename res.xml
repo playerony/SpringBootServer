@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<books>
+  <book title="asda" id="2">
+    <author firstName="test1" lastName="test1" gender="M" age="20" pesel="13245678912" bookID="2"/>
+  </book>
+  <book title="Xddd" id="12">
+    <author firstName="xd" lastName="xd" gender="K" age="99" pesel="13249678912" bookID="12"/>
+    <author firstName="grzegorz" lastName="wasik" gender="M" age="21" pesel="13456789123" bookID="12"/>
+    <author firstName="test1" lastName="test1" gender="M" age="21" pesel="12346578912" bookID="12"/>
+  </book>
+</books>
