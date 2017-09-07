@@ -29,7 +29,10 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void saveBook(Book book) throws DatabaseException, InputException {
-		bookDao.insertBook(book, null);
+		if(bookDao.getBookById(book.getId()) == null)
+			bookDao.insertBook(book, null);
+		else
+			bookDao.updateBook(book.getId(), book);
 	}
 
 	@Override

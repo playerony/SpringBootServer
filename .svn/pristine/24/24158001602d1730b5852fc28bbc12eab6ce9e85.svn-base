@@ -2,7 +2,6 @@ package pl.kamsoft.nfz.controller.rest;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +56,8 @@ public class RestPostController {
 	
 	@PostMapping(value = "/addAuthor", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void saveAuthor(@RequestBody Author author) throws DatabaseException, InputException{
+		System.out.println(author.toString());
+		
 		authorService.saveAuthor(author);
 	}
 	
@@ -74,6 +75,7 @@ public class RestPostController {
 	@PostMapping(value = "/addAuthors", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void saveAuthors(@RequestBody List<Author> authors) throws DatabaseException, InputException{
 		for(Author a : authors) {
+			System.out.println(a.getFirstName());
 			authorService.saveAuthor(a);
 		}
 	}
@@ -100,18 +102,16 @@ public class RestPostController {
 	}
 	
 	@PostMapping(value = "/export")
-	public void exportXML(@RequestBody String path, HttpServletRequest request) throws DatabaseException, XMLException {
+	public void exportXML(@RequestBody String path) throws DatabaseException, XMLException {
 		XMLParser xmlParser = new XMLParser();
-		String realPath = request.getServletContext().getRealPath("/");
 		
-		xmlParser.exportBooksAndAuthorsWithResultSet(realPath + "/" + "test.xml");
+		xmlParser.exportBooksAndAuthorsWithResultSet(path);
 	}
 	
 	@PostMapping(value = "/import")
-	public void importXML(@RequestBody String path, HttpServletRequest request) throws DatabaseException, XMLException {
+	public void importXML(@RequestBody String path) throws DatabaseException, XMLException {
 		XMLImport xmlImport = new XMLImport();
-		String realPath = request.getServletContext().getRealPath("/");
 		
-		xmlImport.importBooksAndAuthors(realPath + "/" + "test.xml");
+		xmlImport.importBooksAndAuthors(path);
 	}
 }
